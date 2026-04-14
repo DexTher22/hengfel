@@ -15,14 +15,24 @@ public class App extends Application {
 
     private static Scene scene;
 
+    public static Stage _stage;
     @Override
     public void start(Stage stage) throws IOException {
+        _stage = stage;
         scene = new Scene(loadFXML("mainScene"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    static void setRoot(String fxml) {
+        try {
+            trySetRoot(fxml);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    static void trySetRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 

@@ -5,7 +5,9 @@ import java.util.InputMismatchException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 public class MainController {
 
@@ -36,8 +38,18 @@ public class MainController {
         String radiusStr = radiusField.getText();
         String heightStr = heightField.getText();
         if(radiusStr.isEmpty() || heightStr.isEmpty()) {
+            this.showMsg();
             throw new InputMismatchException("Hiba! Nem lehet üres bemenet!");
         }
+    }
+
+    void showMsg() {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setContentText("Hiba! Nem lehet üres bemenet!");
+        alert.setHeaderText("Hibás bemenet");
+        alert.setTitle("Hiba");
+        alert.initOwner(App._stage);
+        alert.showAndWait();
     }
 
     @FXML
